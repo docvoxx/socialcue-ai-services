@@ -1,0 +1,36 @@
+{
+  "name": "skippy-ai-services",
+  "version": "1.0.0",
+  "description": "AI Services for SocialCue - LLM, RAG, and Sentiment Analysis",
+  "private": true,
+  "workspaces": [
+    "gateway",
+    "services/*",
+    "shared"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "dev": "docker-compose -f docker-compose.dev.yml up",
+    "start": "docker-compose up",
+    "stop": "docker-compose down",
+    "test": "npm run test --workspaces",
+    "lint": "eslint . --ext .ts",
+    "clean": "npm run clean --workspaces && rm -rf node_modules"
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "rag",
+    "sentiment",
+    "microservices"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,107 @@
+version: '3.8'
+
+# Development overrides for AI Services
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  ai-gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+      target: development
+    environment:
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+    volumes:
+      - ./gateway/src:/app/src:ro
+      - ./gateway/package.json:/app/package.json:ro
+      - ./gateway/tsconfig.json:/app/tsconfig.json:ro
+      - /app/node_modules
+    command: npm run dev
+    ports:
+      - "3000:3000"
+      - "9229:9229"  # Node.js debug port
+    stdin_open: true
+    tty: true
+
+  llm-service:
+    build:
+      context: ./services/llm-service
+      dockerfile: Dockerfile
+      target: development
+    environment:
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+      - MODEL_DEVICE=cpu  # Use CPU for development
+    volumes:
+      - ./services/llm-service/src:/app/src:ro
+      - ./services/llm-service/package.json:/app/package.json:ro
+      - ./services/llm-service/tsconfig.json:/app/tsconfig.json:ro
+      - /app/node_modules
+    command: npm run dev
+    ports:
+      - "3001:3001"  # Expose for direct testing
+      - "9230:9229"  # Node.js debug port
+    stdin_open: true
+    tty: true
+
+  rag-service:
+    build:
+      context: ./services/rag-service
+      dockerfile: Dockerfile
+      target: development
+    environment:
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+    volumes:
+      - ./services/rag-service/src:/app/src:ro
+      - ./services/rag-service/package.json:/app/package.json:ro
+      - ./services/rag-service/tsconfig.json:/app/tsconfig.json:ro
+      - /app/node_modules
+    command: npm run dev
+    ports:
+      - "3002:3002"  # Expose for direct testing
+      - "9231:9229"  # Node.js debug port
+    stdin_open: true
+    tty: true
+
+  sentiment-service:
+    build:
+      context: ./services/sentiment-service
+      dockerfile: Dockerfile
+      target: development
+    environment:
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+    volumes:
+      - ./services/sentiment-service/src:/app/src:ro
+      - ./services/sentiment-service/package.json:/app/package.json:ro
+      - ./services/sentiment-service/tsconfig.json:/app/tsconfig.json:ro
+      - /app/node_modules
+    command: npm run dev
+    ports:
+      - "3003:3003"  # Expose for direct testing
+      - "9232:9229"  # Node.js debug port
+    stdin_open: true
+    tty: true
+
+  redis:
+    ports:
+      - "6379:6379"  # Expose for direct access during development
+    command: redis-server --appendonly yes --loglevel debug
+
+  chromadb:
+    ports:
+      - "8000:8000"  # Expose for direct access during development
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+      - CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER=chromadb.auth.token.TokenConfigServerAuthCredentialsProvider
+      - CHROMA_SERVER_AUTH_CREDENTIALS=dev-token
+      - CHROMA_SERVER_AUTH_PROVIDER=chromadb.auth.token.TokenAuthServerProvider
+
+networks:
+  # Override internal network to allow host access in dev
+  internal:
+    driver: bridge
+    internal: false
