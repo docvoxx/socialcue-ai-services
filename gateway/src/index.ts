@@ -32,8 +32,8 @@ app.use('/v1/sentiment', authenticateAPIKey, sentimentRoutes);
 app.use(errorHandler);
 
 // Start server
-const server = app.listen(config.port, () => {
-  console.log(`AI Gateway listening on port ${config.port}`);
+const server = app.listen(config.port, config.host, () => {
+  console.log(`AI Gateway listening on ${config.host}:${config.port}`);
   console.log(`Environment: ${config.nodeEnv}`);
   console.log(`Service: ${config.serviceName} v${config.serviceVersion}`);
 });
