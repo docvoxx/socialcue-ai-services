@@ -1,0 +1,120 @@
+[
+  {
+    "id": "ctx_001",
+    "stage": "mở đầu",
+    "mood": "playful",
+    "directness": "low",
+    "conversation_history": [
+      {"role": "crush", "message": "Hôm nay trời đẹp nhỉ"},
+      {"role": "user", "message": "Ừ, mà sao bạn biết tôi thích trời đẹp?"}
+    ],
+    "gold_reply": "Thì... quan sát thôi 😊 Thấy bạn hay post ảnh trời đẹp",
+    "candidates": [
+      "Đoán thế thôi, may mà đúng",
+      "Ai cũng thích trời đẹp mà",
+      "Bí mật nghề nghiệp 😎"
+    ],
+    "negative_reply": "Tại tôi theo dõi bạn từ lâu rồi",
+    "metadata": {
+      "emoji_density": 1,
+      "risk_level": "low",
+      "has_open_question": false,
+      "word_count": 12
+    }
+  },
+  {
+    "id": "ctx_002",
+    "stage": "đang nói chuyện",
+    "mood": "cute",
+    "directness": "medium",
+    "conversation_history": [
+      {"role": "user", "message": "Bạn thích ăn gì nhất?"},
+      {"role": "crush", "message": "Mình thích lẩu lắm 🍲"},
+      {"role": "user", "message": "Trùng hợp quá, tôi cũng thích"}
+    ],
+    "gold_reply": "Vậy hả? Vậy lần sau mình đi ăn cùng nhé",
+    "candidates": [
+      "Thế à? Hay đấy",
+      "Ồ, thế chắc mình hợp nhau rồi",
+      "Tuyệt, có bạn đồng hành rồi"
+    ],
+    "negative_reply": "Vậy tuần này đi luôn nhé, tôi book chỗ rồi",
+    "metadata": {
+      "emoji_density": 0,
+      "risk_level": "medium",
+      "has_open_question": false,
+      "word_count": 10
+    }
+  }
+]
+,
+  {
+    "id": "ctx_003",
+    "stage": "rủ hẹn",
+    "mood": "confident",
+    "directness": "high",
+    "conversation_history": [
+      {"role": "user", "message": "Cuối tuần bạn rảnh không?"},
+      {"role": "crush", "message": "Chắc rảnh, sao vậy?"}
+    ],
+    "gold_reply": "Tôi định rủ bạn đi cafe, bạn có muốn không?",
+    "candidates": [
+      "Không có gì, hỏi thế thôi",
+      "Tôi muốn mời bạn đi chơi",
+      "Có chỗ hay, muốn đi cùng không?"
+    ],
+    "negative_reply": "Tôi muốn gặp bạn, bạn phải đi nhé",
+    "metadata": {
+      "emoji_density": 0,
+      "risk_level": "medium",
+      "has_open_question": true,
+      "word_count": 11
+    }
+  },
+  {
+    "id": "ctx_004",
+    "stage": "cứu vãn",
+    "mood": "mature",
+    "directness": "low",
+    "conversation_history": [
+      {"role": "user", "message": "Hôm qua tôi nói hơi vội, xin lỗi nhé"},
+      {"role": "crush", "message": "..."}
+    ],
+    "gold_reply": "Tôi hiểu mình đã làm bạn khó chịu. Cho tôi cơ hội giải thích được không?",
+    "candidates": [
+      "Tôi thật sự xin lỗi",
+      "Mình nói chuyện lại được không?",
+      "Tôi không cố ý đâu"
+    ],
+    "negative_reply": "Bạn phải tha thứ cho tôi chứ",
+    "metadata": {
+      "emoji_density": 0,
+      "risk_level": "high",
+      "has_open_question": true,
+      "word_count": 16
+    }
+  },
+  {
+    "id": "ctx_005",
+    "stage": "sau buổi hẹn",
+    "mood": "playful",
+    "directness": "medium",
+    "conversation_history": [
+      {"role": "user", "message": "Hôm nay vui lắm 😊"},
+      {"role": "crush", "message": "Ừ, mình cũng vui"}
+    ],
+    "gold_reply": "Lần sau mình đi chỗ khác nhé, tôi biết chỗ hay lắm",
+    "candidates": [
+      "Vui là được rồi",
+      "Thế thì tốt quá",
+      "Mình đi tiếp lần sau nhé"
+    ],
+    "negative_reply": "Vậy mai mình gặp tiếp nhé",
+    "metadata": {
+      "emoji_density": 1,
+      "risk_level": "low",
+      "has_open_question": false,
+      "word_count": 13
+    }
+  }
+]

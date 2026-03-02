@@ -1,0 +1,59 @@
+{
+  "generation_strategy": {
+    "description": "Smart data generation for resource-constrained environments",
+    "target_contexts": 250,
+    "batch_size": 20,
+    "total_batches": 15,
+    "filter_threshold": 0.75
+  },
+  "variation_framework": {
+    "stages": [
+      "mở đầu",
+      "đang nói chuyện",
+      "rủ hẹn",
+      "cứu vãn",
+      "sau buổi hẹn"
+    ],
+    "directness_levels": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "moods": [
+      "cute",
+      "playful",
+      "mature",
+      "confident",
+      "shy"
+    ],
+    "emoji_density": [0, 1, 2]
+  },
+  "quality_filters": {
+    "similarity_threshold": 0.92,
+    "min_naturalness_score": 7,
+    "max_pressure_score": 6,
+    "min_ease_of_reply": 7,
+    "max_words_per_message": 25
+  },
+  "batch_distribution": {
+    "description": "Each batch must have diversity",
+    "directness_distribution": {
+      "low": 7,
+      "medium": 7,
+      "high": 6
+    },
+    "stage_distribution": {
+      "mở đầu": 4,
+      "đang nói chuyện": 5,
+      "rủ hẹn": 4,
+      "cứu vãn": 3,
+      "sau buổi hẹn": 4
+    }
+  },
+  "llm_config": {
+    "model": "gpt-4",
+    "temperature": 0.8,
+    "max_tokens": 4000,
+    "top_p": 0.95
+  }
+}
