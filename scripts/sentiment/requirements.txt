@@ -1,0 +1,15 @@
+# Requirements for sentiment labeling and training
+
+# For Ollama-based labeling (FREE)
+requests>=2.31.0
+tqdm>=4.66.0
+
+# For training classifier
+transformers>=4.35.0
+torch>=2.1.0
+datasets>=2.14.0
+scikit-learn>=1.3.0
+accelerate>=0.24.0
+
+# Optional: for OpenAI-based labeling (paid)
+# openai>=1.3.0

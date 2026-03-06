@@ -1,0 +1,7 @@
+# Requirements for LLM fine-tuning with Ollama
+
+# No Python dependencies needed for Ollama fine-tuning
+# Just need Ollama installed: curl -fsSL https://ollama.com/install.sh | sh
+
+# Optional: for testing and validation
+requests>=2.31.0

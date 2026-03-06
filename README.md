@@ -48,6 +48,59 @@ curl -X POST https://lannnsleepy-socialcue-vn.hf.space/v1/sentiment/analyze \
   }'
 ```
 
+### Option 2: Deploy PhoGPT LLM (FREE on HF Spaces)
+
+Deploy Vietnamese LLM API on Hugging Face Spaces - no API keys, 100% free:
+
+```bash
+# 1. Create HF Space with Docker SDK
+# 2. Upload files from llm-service/
+#    - Dockerfile
+#    - requirements.txt
+#    - server.py
+#    - README_HF.md
+# 3. Deploy on CPU Basic (free)
+
+# Test your deployed service
+curl https://YOUR-SPACE.hf.space/health
+
+curl -X POST https://YOUR-SPACE.hf.space/v1/llm/generate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "history": "Crush: Hôm nay mình hơi mệt\nUser: Vậy à",
+    "n_candidates": 5
+  }'
+```
+
+**Model**: PhoGPT-4B-Chat-Q4_K_M (2.36GB, Vietnamese-optimized)
+**Cost**: $0 (HF Spaces CPU Basic)
+**Performance**: 2-5s per generation, native Vietnamese
+
+**See**: `PHOGPT_DEPLOYMENT_GUIDE.md` for complete instructions
+
+### Option 3: Train Models Locally (FREE with Ollama)
+
+Train all AI models locally with Ollama - no API keys, 100% free:
+
+```bash
+# Prerequisites: Install Ollama
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull qwen2.5:3b
+
+# Train all models (~4 hours, $0 cost)
+cd scripts/llm
+python finetune_ollama_local.py --data ../../data/processed/llm/conversations_1000.jsonl --test
+
+cd ../rag
+python setup_embeddings.py --data ../../data/processed/llm/conversations_1000.jsonl
+
+cd ../sentiment
+python create_labels_ollama.py --input ../../data/processed/llm/conversations_1000.jsonl
+python train_classifier.py --data ../../data/processed/sentiment/labeled.jsonl
+```
+
+**See**: `OLLAMA_TRAINING_GUIDE.md` for complete instructions
+
 ### Option 2: Deploy Your Own Space
 
 1. Fork this repository
@@ -174,6 +227,51 @@ python generate_crush_dataset.py
 ```
 
 See [CRUSH_DATA_GENERATION_GUIDE.md](./CRUSH_DATA_GENERATION_GUIDE.md) and [OLLAMA_DATA_FACTORY_GUIDE.md](./OLLAMA_DATA_FACTORY_GUIDE.md) for detailed instructions.
+
+## 🎓 Model Training
+
+Train all AI models locally with Ollama - 100% free, no API keys needed:
+
+### Training Status
+- ✅ **Ranker**: Trained (77.5% top-1, 100% top-3 accuracy)
+- 🎯 **LLM**: Ready to train (30 min, $0)
+- 🎯 **RAG**: Ready to setup (10 min, $0)
+- 🎯 **Sentiment**: Ready to train (3 hours, $0)
+
+### Quick Start Training
+```bash
+# 1. Install Ollama
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull qwen2.5:3b
+
+# 2. Train LLM (30 min)
+cd scripts/llm
+python finetune_ollama_local.py \
+  --data ../../data/processed/llm/conversations_1000.jsonl \
+  --samples 50 \
+  --model-name socialcue-crush \
+  --test
+
+# 3. Setup RAG (10 min)
+cd ../rag
+python setup_embeddings.py \
+  --data ../../data/processed/llm/conversations_1000.jsonl \
+  --output ../../models/rag_embeddings
+
+# 4. Train Sentiment (3 hours)
+cd ../sentiment
+python create_labels_ollama.py \
+  --input ../../data/processed/llm/conversations_1000.jsonl \
+  --output ../../data/processed/sentiment/labeled.jsonl
+
+python train_classifier.py \
+  --data ../../data/processed/sentiment/labeled.jsonl \
+  --output ../../models/sentiment_classifier
+```
+
+**Total time**: ~4 hours | **Total cost**: $0
+
+See [OLLAMA_TRAINING_GUIDE.md](./OLLAMA_TRAINING_GUIDE.md) for complete training instructions.
 
 ## 🔧 Development
 
