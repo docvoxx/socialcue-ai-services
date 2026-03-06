@@ -1,6 +1,5 @@
 ---
 title: SocialCue AI Services
-emoji: 🤖
 colorFrom: blue
 colorTo: purple
 sdk: docker
@@ -336,3 +335,4 @@ MIT License - see LICENSE file for details
 - **Hugging Face Space**: https://huggingface.co/spaces/lannnsleepy/socialcue-vn
 - **GitHub Repository**: https://github.com/docvoxx/socialcue-ai-services
 - **Main SocialCue App**: https://github.com/docvoxx/socialcue-main-app
+
